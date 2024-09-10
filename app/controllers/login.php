@@ -1,17 +1,18 @@
 <?php
 session_start();
 require_once realpath(dirname(__DIR__, 1) . '/core/DB.php');
+require_once realpath(dirname(__DIR__, 1) . '/models/User.php');
 
-$result = DB::statement("SELECT * FROM magoautomation WHERE email_login = :username AND senha_login = :password", [
-    ":username" => $_POST['username'],
-    ":password" => md5($_POST['password']),
+$user = new User([
+    "email" => $_POST['username'],
+    "password" => $_POST['password']
 ]);
 
-if(count($result["fetch"]) > 0){
-    $_SESSION["auth"] = [
-        "username" => $result["fetch"][0]["email_login"],
-        "id" => $result["fetch"][0]["id"],
-    ];
+$informations = $user->getUser();
+
+if(!isset($informations['erro'])){
+
+    $_SESSION["auth"] = $informations;
 
     header("Location: ../views/dashboard.php");
     die();

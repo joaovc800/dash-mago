@@ -1,2 +1,35 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css";
+
+:root{
+    --is-purple-dark: #342745;
+    --is-purple-medium: #9f37fe;
+    --is-green-medium: #599501;
+    --is-green-light: #89e602;
+    --is-danger-medium: #f80302;
+    --is-cyan: #00706a;
+}
+
+.has-background-purple-dark{
+    background-color: var(--is-purple-dark) !important;
+}
+
+.has-background-green-light{
+    background-color: var(--is-green-light) !important;
+}
+
+[data-profit="win"]{
+    background-color: var(--is-green-medium) !important;
+}
+
+[data-profit="loss"]{
+    background-color: var(--is-danger-medium) !important;
+}
+
+[data-state="on"]{
+    background-color: var(--is-purple-medium) !important;
+}
+
+[data-state="off"]{
+    background-color: var(--is-cyan) !important;
+}

@@ -4,7 +4,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -31,7 +31,7 @@
                             endif;
                         ?>
                         <form method="post" action="../app/controllers/login.php" class="box">
-                            <img class="image py-2" src="./src/assets/images/roleta-brasileira-playtech.jpg">
+                            <img class="image py-2 is-16by9" src="./src/assets/images/roleta-brasileira-playtech.jpg">
                             <div class="field">
                                 <label for="username" class="label">Email</label>
                                 <div class="control has-icons-left">
