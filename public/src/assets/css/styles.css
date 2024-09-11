@@ -11,18 +11,18 @@
     --is-cyan: #00706a;
 }
 
-html{
+html {
     overflow-y: auto !important;
 }
 
 ::-webkit-scrollbar {
-	width: 6px;
-	height: 6px;
+    width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #555;
-	-webkit-border-radius: 4px;
+    background-color: #555;
+    -webkit-border-radius: 4px;
 }
 
 .has-background-purple-dark {
@@ -70,7 +70,7 @@ html{
     box-shadow: 0 0 0 0.1875em var(--is-purple-dark);
 }
 
-.dt-length label{
+.dt-length label {
     display: flex;
     align-items: center;
     gap: 6px;

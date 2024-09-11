@@ -34,7 +34,6 @@ const $table = $('#table-operations').dataTable({
             next: "Próximo",
             previous: "Anterior"
         }
-        
     }
 })
 
@@ -69,11 +68,8 @@ formOperation.addEventListener("submit", async (e) =>  {
     })
 
     if(success){
-
         instance.row.add([ date.value, value.value ]).draw()
-
         notyf.success(message)
-        
         return
     }
 

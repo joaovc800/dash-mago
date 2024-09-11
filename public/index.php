@@ -42,13 +42,16 @@
                                 </div>
                             </div>
                             <div class="field">
-                                <label for="password" class="label">Password</label>
+                                <label for="password" class="label">Senha</label>
                                 <div class="control has-icons-left">
                                     <input name="password" id="password" type="password" placeholder="**********" class="input" required>
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-lock"></i>
                                     </span>
                                 </div>
+                            </div>
+                            <div class="field">
+                                <a href="./password-solicitation.php">Esqueci minha senha</a>
                             </div>
                             <div class="field">
                                 <button type="submit" class="button is-fullwidth has-background-green-medium py-2">

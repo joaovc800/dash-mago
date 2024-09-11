@@ -10,9 +10,9 @@ class Hash
         self::$secretKey = $key;
     }
 
-    public static function encrypt($content)
+    public static function encrypt(string $content): string
     {
-        $secretKey = self::$secretKey ?? 'jcçe%6a!1gk5!d5ddgçha#1@7@#317$f';
+        $secretKey = self::$secretKey ?? 'LG4$EzT@7d#VnDjWpH2$CyydV';
 
         try {
             if (empty($secretKey)) throw new \Exception("The secret key is empty use the secret method to set the value", 1);
@@ -29,9 +29,9 @@ class Hash
         }
     }
 
-    public static function decrypt($content)
+    public static function decrypt(string $content): string
     {
-        $secretKey = self::$secretKey ?? 'jcçe%6a!1gk5!d5ddgçha#1@7@#317$f';
+        $secretKey = self::$secretKey ?? 'LG4$EzT@7d#VnDjWpH2$CyydV';
 
         try {
             if (empty($secretKey)) throw new \Exception("The secret key is empty use the secret method to set the value", 2);
