@@ -14,7 +14,7 @@
                     Perfil
                     <i class="fa-solid fa-user"></i>
                 </a>
-                <a href="../../public/" class="dropdown-item is-danger is-flex is-align-items-center is-gap-1">
+                <a href="./operations.php" class="dropdown-item is-danger is-flex is-align-items-center is-gap-1">
                     Operações
                     <i class="fa-solid fa-cogs"></i>
                 </a>
@@ -50,5 +50,7 @@
 
 <script defer src="./assets/js/notify.js"></script>
 <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script defer src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+<script defer src="https://cdn.datatables.net/2.1.5/js/dataTables.bulma.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.9/jquery.inputmask.min.js" integrity="sha512-F5Ul1uuyFlGnIT1dk2c4kB4DBdi5wnBJjVhL7gQlGh46Xn0VhvD8kgxLtjdZ5YN83gybk/aASUAlpdoWUjRR3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 

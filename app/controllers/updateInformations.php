@@ -12,7 +12,8 @@ $map = [
     'gale' => 'gale',
     'initialBankroll' => 'banca_inicial',
     'stoploss' => 'stoplos',
-    'stopwin' => 'stopwin'
+    'stopwin' => 'stopwin',
+    'status' => 'status'
 ];
 
 $collection = [];
@@ -25,27 +26,22 @@ foreach ($map as $key => $column) {
             $value = str_replace(',', '.', $value);
             $value = str_replace('.', '', $value);
         } else {
-            $value = $json[$postKey];
+            $value = $json[$key];
         }
         
         $collection[$column] = $value;
     }
 }
 
-print_r($collection);
-exit();
-
 $user = new User([
     "email" => $_SESSION['auth']['username'],
     "passwordhash" => $_SESSION['auth']['password']
 ]);
 
-/* $informations = $user->updateInformations();
+$informations = $user->updateInformations($collection, $_SESSION['auth']['id']);
 
-Response::success($informations, 'Dados retornados com sucesso'); */
-
-/* if($update['statement']){
-    Response::success(message:'Senha atualizada com sucesso!');
+if($informations['statement']){
+    Response::success($collection, 'Dados atualizados com sucesso!');
 }
 
-Response::fail(message:'Houve um erro ao atualizar a senha, por favor tente novamente!'); */
+Response::fail([], 'Houve um erro ao atualizar os dados, por favor tente novamente!');

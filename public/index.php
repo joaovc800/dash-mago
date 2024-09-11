@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="field">
-                                <button type="submit" class="button is-success">
+                                <button type="submit" class="button is-fullwidth has-background-green-medium py-2">
                                     Login
                                 </button>
                             </div>

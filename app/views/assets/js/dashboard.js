@@ -1,4 +1,4 @@
-import { requests, api, isLoadingInput } from './utils.js'
+import { requests, api, formatCurrency } from './utils.js'
 
 const buttonDashboard = document.getElementById('dashboard-button')
 const buttonConfig = document.getElementById('config-button')
@@ -23,7 +23,7 @@ $('#init-banroll, #stopwin, #stoploss').inputmask('currency', {
     placeholder: '0'
 })
 
-const config = {
+const configInputs = {
     "init-banroll" : data.initialBankroll,
     "stopwin" : data.stopwin,
     "stoploss" : data.stoploss,
@@ -31,9 +31,20 @@ const config = {
     "gale" : data.gale,
 }
 
-for (const key in config) {
+for (const key in configInputs) {
     const input = document.getElementById(key)
-    input.value = config[key]
+    input.value = configInputs[key]
+}
+
+const configInformations = {
+    "profit" : formatCurrency(data.initialBankroll),
+    "bankrollTotal" : formatCurrency(data.initialBankroll),
+    "entries" : data.operations,
+}
+
+for (const key in configInformations) {
+    const element = document.getElementById(key)
+    element.innerText = configInformations[key]
 }
 
 buttonDashboard.addEventListener('click', ({ target }) => {
@@ -54,32 +65,57 @@ buttonConfig.addEventListener('click', ({ target }) => {
     title.innerHTML = target.getAttribute('data-title')
 })
 
-buttonOnOff.addEventListener('click', ({ target }) => {
-    const configStates = {
-        desligado: {
-            state: "off",
-            text: 'Desligar'
-        },
-        ligado: {
-            state: "on",
-            text: 'Ligar'
-        },
-    }
+const configStates = {
+    desligado: {
+        state: "on",
+        changeState: "off",
+        text: "Ligar",
+        changeStateText: "ligado",
+    },
+    ligado: {
+        state: "off",
+        changeState: "on",
+        text: "Desligar",
+        changeStateText: "desligado",
+    },
+}
 
-    target.setAttribute('data-state', configStates['desligado'].state)
-    target.innerHTML = configStates['desligado'].text
+const { state, text } = configStates[data.status]
+buttonOnOff.setAttribute("data-state", state)
+buttonOnOff.setAttribute("data-state-text", data.status)
+buttonOnOff.innerText = text
+
+
+buttonOnOff.addEventListener('click', async ({ target }) => {
+    const currentState = target.getAttribute("data-state-text")
+
+    const stateText = configStates[currentState].changeStateText
+
+    const { data, success, message } = await requests.post(api.base('updateInformations'), {
+        status: stateText
+    })
 
     const notyf = new Notyf()
 
-    notyf.success('Status alterado com sucesso')
+    if(success){
+        
+        target.setAttribute('data-state', configStates[data.status].state)
+        target.setAttribute('data-state-text', data.status)
+        target.innerHTML = configStates[data.status].text
+
+        notyf.success('Status alterado com sucesso')
+        return
+    }
+
+    notyf.error('Error ao alterar o status')
 })
 
-formConfig.addEventListener('submit', (e) => {
+formConfig.addEventListener('submit', async (e) => {
     e.preventDefault()
 
     const [ initialBankroll, stopwin, stoploss, chip, gale, save ] = e.target
 
-    requests.post(api.base('updateInformations'), {
+    const { success, message } = await requests.post(api.base('updateInformations'), {
         initialBankroll: initialBankroll.value,
         stopwin: stopwin.value,
         stoploss: stoploss.value,
@@ -93,5 +129,14 @@ formConfig.addEventListener('submit', (e) => {
         { input: gale },
         { input: save },
     ]})
+
+    const notyf = new Notyf()
+
+    if(success){
+        notyf.success(message)
+        return
+    }
+
+    notyf.error(message)
     
 })

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11/09/2024 às 15:03
--- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.0.28
+-- Tempo de geração: 11/09/2024 às 19:06
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -49,7 +49,20 @@ CREATE TABLE `magoautomation` (
 --
 
 INSERT INTO `magoautomation` (`id`, `email_login`, `senha_login`, `banca_inicial`, `banca_atual`, `stopwin`, `stoplos`, `ficha`, `gale`, `status`, `noperacoes`, `ativo`, `assinatura`, `vencimento`) VALUES
-(1, 'teste@teste.com', 'c20ad4d76fe97759aa27a0c99bff6710', 2102.00, 2500.30, 3000, 500, 1, 0, 'desligado', 6, 0, '1', '2024-09-30');
+(1, 'teste@teste.com', '202cb962ac59075b964b07152d234b70', 2102.00, 2500.30, 3000, 500, 1, 1, 'desligado', 6, 0, '1', '2024-09-30');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `operations`
+--
+
+CREATE TABLE `operations` (
+  `id` int(11) NOT NULL,
+  `iduser` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `value` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tabelas despejadas
@@ -62,6 +75,13 @@ ALTER TABLE `magoautomation`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `operations`
+--
+ALTER TABLE `operations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_x_operations` (`iduser`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
@@ -70,6 +90,22 @@ ALTER TABLE `magoautomation`
 --
 ALTER TABLE `magoautomation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `operations`
+--
+ALTER TABLE `operations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `operations`
+--
+ALTER TABLE `operations`
+  ADD CONSTRAINT `user_x_operations` FOREIGN KEY (`iduser`) REFERENCES `magoautomation` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

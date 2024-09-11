@@ -15,7 +15,10 @@ $user = new User([
 $update = $user->updatePassword($json['password'], $_SESSION['auth']['id']);
 
 if($update['statement']){
-    Response::success(message:'Senha atualizada com sucesso!');
+
+    $_SESSION['auth']['password'] = md5($json['password']);
+    
+    Response::success([], 'Senha atualizada com sucesso!');
 }
 
-Response::fail(message:'Houve um erro ao atualizar a senha, por favor tente novamente!');
+Response::fail([], 'Houve um erro ao atualizar a senha, por favor tente novamente!');

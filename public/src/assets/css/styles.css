@@ -11,6 +11,20 @@
     --is-cyan: #00706a;
 }
 
+html{
+    overflow-y: auto !important;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #555;
+	-webkit-border-radius: 4px;
+}
+
 .has-background-purple-dark {
     background-color: var(--is-purple-dark) !important;
 }
@@ -54,4 +68,10 @@
 .textarea:focus-within {
     border-color: var(--is-purple-medium) !important;
     box-shadow: 0 0 0 0.1875em var(--is-purple-dark);
+}
+
+.dt-length label{
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }

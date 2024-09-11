@@ -36,6 +36,9 @@ formProfile.addEventListener('submit', async ( e ) => {
             refer.innerText = messages.error
             refer.classList.add('is-danger')
         })
+
+        const notfy = new Notyf()
+        notfy.error("Senhas não conferem")
         return
     }
 

@@ -1,5 +1,8 @@
 export const api = {
-    base: (endpoint) => `${window.origin}/freelancer/dashboard-mago/app/controllers/${endpoint}.php`
+    base: (endpoint) => {
+        const [ baseApi ] = window.location.href.split('app')
+        return `${baseApi}/app/controllers/${endpoint}.php`
+    }
 }
 
 export const requests = {
@@ -106,4 +109,8 @@ export function isLoadingInput({ inputs, type }) {
         controlIsLoadding.classList[classListFunc]('is-loading')
         input[attributeFunc.fn](...attributeFunc.args)
     })
+}
+
+export function formatCurrency(value) {
+    return `R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
