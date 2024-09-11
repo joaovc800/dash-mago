@@ -47,12 +47,69 @@ class User
 
         if (count($result["fetch"]) > 0) {
 
+            [ $response ] = $result["fetch"];
+
             return [
-                "username" => $result["fetch"][0]["email_login"],
-                "id" => $result["fetch"][0]["id"],
+                "username" => $response["email_login"],
+                "password" => $response["senha_login"],
+                "id" => $response["id"],
             ];
         }
 
         return ["erro" => true, "message" => "User not found"];
+    }
+
+    public function getDetails(): array
+    {
+
+        $result = DB::statement("SELECT * FROM magoautomation WHERE email_login = :username AND senha_login = :password", [
+            ":username" => $this->email,
+            ":password" => $this->password,
+        ]);
+
+        if (count($result["fetch"]) > 0) {
+
+            [ $response ] = $result["fetch"];
+
+            return [
+                "initialBankroll" => $response["banca_inicial"],
+                "currentBankroll" => $response["banca_atual"],
+                "stopwin" => $response["stopwin"],
+                "stoploss" => $response["stoplos"],
+                "chip" => $response["ficha"],
+                "gale" => $response["gale"],
+                "on" => $response["ligado"],
+                "operations" => $response["noperacoes"],
+                "active" => $response["ativo"],
+                "signature" => $response["assinatura"],
+                "maturity" => $response["vencimento"],
+            ];
+        }
+
+        return ["erro" => true, "message" => "User not found"];
+    }
+
+
+    /**
+     * Método para alterar a senha
+     *
+     * @param string $newpassword
+     * @param int $userId
+     * 
+     * @return array
+     * 
+     */
+    public function updatePassword(string $newpassword, int $userId): array
+    {
+        $result = DB::update(
+            "magoautomation",
+            [
+                "senha_login" => md5($newpassword)
+            ],
+            [
+                ['id', $userId, '=']
+            ]
+        );
+        return $result;
     }
 }

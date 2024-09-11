@@ -1,7 +1,8 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css";
+@import "https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css";
 
-:root{
+:root {
     --is-purple-dark: #342745;
     --is-purple-medium: #9f37fe;
     --is-green-medium: #599501;
@@ -10,26 +11,47 @@
     --is-cyan: #00706a;
 }
 
-.has-background-purple-dark{
+.has-background-purple-dark {
     background-color: var(--is-purple-dark) !important;
 }
 
-.has-background-green-light{
-    background-color: var(--is-green-light) !important;
-}
-
-[data-profit="win"]{
-    background-color: var(--is-green-medium) !important;
-}
-
-[data-profit="loss"]{
-    background-color: var(--is-danger-medium) !important;
-}
-
-[data-state="on"]{
+.has-background-purple-medium {
     background-color: var(--is-purple-medium) !important;
 }
 
-[data-state="off"]{
+.has-background-green-light {
+    background-color: var(--is-green-light) !important;
+}
+
+.has-background-green-medium {
+    background-color: var(--is-green-medium) !important;
+}
+
+[data-profit="win"] {
+    background-color: var(--is-green-medium) !important;
+}
+
+[data-profit="loss"] {
+    background-color: var(--is-danger-medium) !important;
+}
+
+[data-state="on"] {
+    background-color: var(--is-purple-medium) !important;
+}
+
+[data-state="off"] {
     background-color: var(--is-cyan) !important;
+}
+
+.input:focus,
+.input:focus-within,
+.is-focused.input,
+.is-focused.textarea,
+.select select.is-focused,
+.select select:focus,
+.select select:focus-within,
+.textarea:focus,
+.textarea:focus-within {
+    border-color: var(--is-purple-medium) !important;
+    box-shadow: 0 0 0 0.1875em var(--is-purple-dark);
 }
