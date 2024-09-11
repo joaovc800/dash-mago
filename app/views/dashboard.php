@@ -50,7 +50,7 @@ require_once realpath(dirname(__DIR__, 1) . '/controllers/checkSession.php');
             </div>
 
             <div class="is-flex pt-3">
-                <button data-state="on" class="py-3 button is-fullwidth is-hoverable has-text-light has-text-weight-bold is-uppercase">Ligar</button>
+                <button id="on-off" data-state="on" class="py-3 button is-fullwidth is-hoverable has-text-light has-text-weight-bold is-uppercase">Ligar</button>
             </div>
         </div>
         <div id="config" class="is-hidden">
@@ -80,7 +80,7 @@ require_once realpath(dirname(__DIR__, 1) . '/controllers/checkSession.php');
 
                 <div class="field">
                     <label for="chip" class="label is-clickable">Valor da ficha</label>
-                    <div class="select is-fullwidth">
+                    <div class="select is-fullwidth control">
                         <select id="chip">
                             <option value="1">R$ 0,50</option>
                             <option value="2">R$ 1,00</option>
@@ -96,7 +96,7 @@ require_once realpath(dirname(__DIR__, 1) . '/controllers/checkSession.php');
 
                 <div class="field">
                     <label for="gale" class="label is-clickable">Nº de gale</label>
-                    <div class="select is-fullwidth">
+                    <div class="select is-fullwidth control">
                         <select id="gale">
                             <option value="0">0</option>
                             <option value="1">1</option>

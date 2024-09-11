@@ -49,7 +49,5 @@ formProfile.addEventListener('submit', async ( e ) => {
 
     notyf[type](message)
 
-    if(success){
-        inputsPassword.forEach(({input}) => input.value = '')
-    }
+    if(success) inputsPassword.forEach(({input}) => input.value = '')
 })

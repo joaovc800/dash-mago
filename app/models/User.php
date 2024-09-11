@@ -27,7 +27,15 @@ class User
     public function __construct(array $credentials)
     {
         $this->email = $credentials['email'];
-        $this->password = md5($credentials['password']);
+
+        if(isset($credentials['passwordhash'])){
+            $this->password = $credentials['passwordhash'];
+        }
+
+        if(isset($credentials['password'])){
+            $this->password = md5($credentials['password']);
+        }
+        
     }
 
 
@@ -47,12 +55,12 @@ class User
 
         if (count($result["fetch"]) > 0) {
 
-            [ $response ] = $result["fetch"];
-
             return [
-                "username" => $response["email_login"],
-                "password" => $response["senha_login"],
-                "id" => $response["id"],
+                "username" => $result["fetch"][0]["email_login"],
+                "password" => $result["fetch"][0]["senha_login"],
+                "id" => $result["fetch"][0]["id"],
+                "maturity" => $result["fetch"][0]["vencimento"],
+                "signature" => $result["fetch"][0]["assinatura"],
             ];
         }
 
@@ -69,20 +77,17 @@ class User
 
         if (count($result["fetch"]) > 0) {
 
-            [ $response ] = $result["fetch"];
-
             return [
-                "initialBankroll" => $response["banca_inicial"],
-                "currentBankroll" => $response["banca_atual"],
-                "stopwin" => $response["stopwin"],
-                "stoploss" => $response["stoplos"],
-                "chip" => $response["ficha"],
-                "gale" => $response["gale"],
-                "on" => $response["ligado"],
-                "operations" => $response["noperacoes"],
-                "active" => $response["ativo"],
-                "signature" => $response["assinatura"],
-                "maturity" => $response["vencimento"],
+                "initialBankroll" => (int) $result["fetch"][0]["banca_inicial"],
+                "currentBankroll" => (int) $result["fetch"][0]["banca_atual"],
+                "stopwin" => (int) $result["fetch"][0]["stopwin"],
+                "stoploss" => (int) $result["fetch"][0]["stoplos"],
+                "chip" => $result["fetch"][0]["ficha"],
+                "gale" => $result["fetch"][0]["gale"],
+                "status" => $result["fetch"][0]["status"],
+                "operations" => $result["fetch"][0]["noperacoes"],
+                "signature" => $result["fetch"][0]["assinatura"],
+                "maturity" => $result["fetch"][0]["vencimento"],
             ];
         }
 
@@ -106,6 +111,18 @@ class User
             [
                 "senha_login" => md5($newpassword)
             ],
+            [
+                ['id', $userId, '=']
+            ]
+        );
+        return $result;
+    }
+
+    public function updateInformations(array $collection, int $userId): array
+    {
+        $result = DB::update(
+            "magoautomation",
+            $collection,
             [
                 ['id', $userId, '=']
             ]

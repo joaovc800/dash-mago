@@ -6,7 +6,7 @@ export const requests = {
 
     get: async function (url, params = {}, config) {
 
-        if (config.isLoadingInput.length > 0) {
+        if (config && config.isLoadingInput.length > 0) {
             isLoadingInput({
                 inputs: config.isLoadingInput,
                 type: 'start'
@@ -34,7 +34,7 @@ export const requests = {
             console.error('Erro na requisição GET:', error);
             throw error;
         } finally {
-            if (config.isLoadingInput.length > 0) {
+            if (config && config.isLoadingInput.length > 0) {
                 isLoadingInput({
                     inputs: config.isLoadingInput,
                     type: 'finish'
@@ -45,7 +45,7 @@ export const requests = {
 
     post: async function (url, body = {}, config) {
 
-        if (config.isLoadingInput.length > 0) {
+        if (config && config.isLoadingInput.length > 0) {
             isLoadingInput({
                 inputs: config.isLoadingInput,
                 type: 'start'
@@ -71,7 +71,7 @@ export const requests = {
             console.error('Erro na requisição POST:', error);
             throw error;
         } finally {
-            if (config.isLoadingInput.length > 0) {
+            if (config && config.isLoadingInput.length > 0) {
                 isLoadingInput({
                     inputs: config.isLoadingInput,
                     type: 'finish'
@@ -102,7 +102,7 @@ export function isLoadingInput({ inputs, type }) {
     const { classListFunc, attributeFunc } = config[type]
 
     inputs.forEach(({ input }) => {
-        const controlIsLoadding = input.closest('.control')
+        const controlIsLoadding = input.nodeName === 'BUTTON' ? input : input.closest('.control')
         controlIsLoadding.classList[classListFunc]('is-loading')
         input[attributeFunc.fn](...attributeFunc.args)
     })
