@@ -1,3 +1,7 @@
+import { requests, api, formatCurrency } from './utils.js'
+
+const notyf = new Notyf()
+
 const formOperation = document.getElementById("form-operation");
 
 $('#value').inputmask('currency', {
@@ -36,10 +40,42 @@ const $table = $('#table-operations').dataTable({
 
 const instance = $table.api()
 
-formOperation.addEventListener("submit", (e) =>  {
+const { data, message, success } = await requests.get(api.base('getOperations'))
+
+if(!success){
+    notyf.error(message)
+}
+
+data.forEach(({ date, value }) => {
+    instance.row.add([ date, formatCurrency(value) ]).draw()
+})
+
+formOperation.addEventListener("submit", async (e) =>  {
     e.preventDefault();
     
-    const [ date, value ] = e.target
+    const [ date, value, button ] = e.target
     
-    instance.row.add([ date.value, value.value ]).draw()
+    const data = {
+        date: date.value.split('/').reverse().join('-'),
+        value: value.value.replace(/[^\d.]/g,'').split('.').join('')
+    }
+
+    const { success, message } = await requests.post(api.base("createOperation"), data , {
+        isLoadingInput: [
+            { input: date },
+            { input: value },
+            { input: button },
+        ]
+    })
+
+    if(success){
+
+        instance.row.add([ date.value, value.value ]).draw()
+
+        notyf.success(message)
+        
+        return
+    }
+
+    notyf.error(message)
 })
