@@ -66,17 +66,17 @@ buttonConfig.addEventListener('click', ({ target }) => {
 })
 
 const configStates = {
-    desligado: {
+    desligar: {
         state: "on",
         changeState: "off",
         text: "Ligar",
-        changeStateText: "ligado",
+        changeStateText: "ligar",
     },
-    ligado: {
+    ligar: {
         state: "off",
         changeState: "on",
         text: "Desligar",
-        changeStateText: "desligado",
+        changeStateText: "desligar",
     },
 }
 

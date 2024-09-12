@@ -23,6 +23,10 @@ formResetPassword.addEventListener("submit", async (e) => {
     const notyf = new Notyf({ duration })
 
     if(success){
+
+        password.setAttribute('disabled', 'disabled')
+        button.setAttribute('disabled', 'disabled')
+
         notyf.success(message).on('dismiss', ({target, event}) => console.log(target, event));
 
         setTimeout(() => {

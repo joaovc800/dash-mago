@@ -47,15 +47,17 @@ if(!success){
 
 const { data: { initialBankroll }  } = await requests.get(api.base('getInformations'))
 
-data.forEach(({ date, value }) => {
+if(!data.erro){
+    data.forEach(({ date, value }) => {
     
-    const balance = initialBankroll + ( value )
-
-    const { color, text } = balance > initialBankroll ? { color: 'is-success', text: 'Positivo' } : { color: 'is-danger', text: 'Negativo' }
-
-    const tag = `<span class="tag ${color}">${text}</span>`
-    instance.row.add([ date, formatCurrency(value), tag ]).draw()
-})
+        const balance = initialBankroll + ( value )
+    
+        const { color, text } = balance > initialBankroll ? { color: 'is-success', text: 'Positivo' } : { color: 'is-danger', text: 'Negativo' }
+    
+        const tag = `<span class="tag ${color}">${text}</span>`
+        instance.row.add([ date, formatCurrency(value), tag ]).draw()
+    })
+}
 
 formOperation.addEventListener("submit", async (e) =>  {
     e.preventDefault();
@@ -76,7 +78,7 @@ formOperation.addEventListener("submit", async (e) =>  {
     })
 
     if(success){
-        instance.row.add([ date.value, value.value ]).draw()
+        instance.row.add([ date.value, value.value, '' ]).draw()
         notyf.success(message)
         return
     }

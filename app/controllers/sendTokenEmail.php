@@ -22,12 +22,12 @@ $token = Hash::encrypt(json_encode([
     'password' => $result["fetch"][0]['senha_login'],
     'id' => $result["fetch"][0]['id'],
     'ip' => $_SERVER['REMOTE_ADDR'],
-    'timestamp' => time() + (1 * 60)
+    'timestamp' => time() + (10 * 60)
 ]));
 
 $origin = $_SERVER['HTTP_ORIGIN'];
 $uriExploded = explode('/', $_SERVER['REQUEST_URI']);
 $uri = implode('/', array_slice($uriExploded, 0, 3));
-$url = $origin . $uri . '/views/reset-password.php?token=' . urlencode($token);
+$url = $origin . $uri . '/app/views/reset-password.php?token=' . urlencode($token);
 
 Response::success(['url' => $url], 'Foi enviado um link de reset para seu e-mail');
