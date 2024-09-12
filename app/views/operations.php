@@ -48,6 +48,7 @@ require_once realpath(dirname(__DIR__, 1) . '/controllers/checkSession.php');
                 <tr>
                     <td>Data</td>
                     <td>Valor</td>
+                    <td>Status</td>
                 </tr>
             </thead>
             <tbody></tbody>

@@ -10,7 +10,7 @@ $('#value').inputmask('currency', {
     radixPoint: ',',
     groupSeparator: '.',
     autoGroup: true,
-    allowMinus: false,
+    allowMinus: true,
     digits: 0, // Sem casas decimais
     digitsOptional: false, // Não permite casas decimais opcionais
     placeholder: '0'
@@ -45,8 +45,16 @@ if(!success){
     notyf.error(message)
 }
 
+const { data: { initialBankroll }  } = await requests.get(api.base('getInformations'))
+
 data.forEach(({ date, value }) => {
-    instance.row.add([ date, formatCurrency(value) ]).draw()
+    
+    const balance = initialBankroll + ( value )
+
+    const { color, text } = balance > initialBankroll ? { color: 'is-success', text: 'Positivo' } : { color: 'is-danger', text: 'Negativo' }
+
+    const tag = `<span class="tag ${color}">${text}</span>`
+    instance.row.add([ date, formatCurrency(value), tag ]).draw()
 })
 
 formOperation.addEventListener("submit", async (e) =>  {
@@ -56,7 +64,7 @@ formOperation.addEventListener("submit", async (e) =>  {
     
     const data = {
         date: date.value.split('/').reverse().join('-'),
-        value: value.value.replace(/[^\d.]/g,'').split('.').join('')
+        value: value.value.replace('R$ ','').split('.').join('')
     }
 
     const { success, message } = await requests.post(api.base("createOperation"), data , {
