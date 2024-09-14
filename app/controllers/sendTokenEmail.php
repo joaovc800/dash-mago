@@ -3,6 +3,7 @@
 require_once realpath(dirname(__DIR__, 1) . '/core/DB.php');
 require_once realpath(dirname(__DIR__, 1) . '/core/Response.php');
 require_once realpath(dirname(__DIR__, 1) . '/core/Hash.php');
+require_once realpath(dirname(__DIR__, 1) . '/service/MailService.php');
 
 header('Content-Type: application/json');
 
@@ -28,6 +29,12 @@ $token = Hash::encrypt(json_encode([
 $origin = $_SERVER['HTTP_ORIGIN'];
 $uriExploded = explode('/', $_SERVER['REQUEST_URI']);
 $uri = implode('/', array_slice($uriExploded, 0, 3));
-$url = $origin . $uri . '/app/views/reset-password.php?token=' . urlencode($token);
+$url = $origin . '/app/views/reset-password.php?token=' . urlencode($token);
+
+MailService::send(
+    $result["fetch"][0]['email_login'],
+    'Reset de senha',
+    $url
+);
 
 Response::success(['url' => $url], 'Foi enviado um link de reset para seu e-mail');

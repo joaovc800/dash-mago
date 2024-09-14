@@ -6,11 +6,11 @@ class DB
     {
         try {
             $config = [
-                'host' => 'localhost',
+                'host' => 'mysql.iamonstro.com.br',
                 'port' => '',
-                'dbname' => 'mago',
-                'user' => 'root',
-                'password' => ''
+                'dbname' => 'iamonstro02',
+                'user' => 'iamonstro02',
+                'password' => 'mago123'
             ];
 
             $credentials = 'mysql:';

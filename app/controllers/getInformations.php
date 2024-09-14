@@ -12,10 +12,8 @@ $user = new User([
 
 $informations = $user->getDetails();
 
-Response::success($informations, 'Dados retornados com sucesso');
-
-/* if($update['statement']){
-    Response::success(message:'Senha atualizada com sucesso!');
+if($informations['signature']){
+    Response::success($informations, 'Dados retornados com sucesso');
 }
 
-Response::fail(message:'Houve um erro ao atualizar a senha, por favor tente novamente!'); */
+Response::fail([], 'Parece que sua assinatura não está ativa, renove para continuar usando os benefícios');

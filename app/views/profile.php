@@ -22,7 +22,7 @@ require_once realpath(dirname(__DIR__, 1) . '/controllers/checkSession.php');
         <div class="is-flex is-flex-direction-column is-gap-4">
             <div class="is-flex is-flex-direction-column is-align-items-center is-gap-2">
                 <figure class="image is-128x128">
-                    <img class="is-rounded" src="https://bulma.io/assets/images/placeholders/128x128.png" />
+                    <img class="is-rounded" src="./images/profile.png" />
                 </figure>
                 <span class="subtitle is-4">
                     <?=$_SESSION['auth']['username']?>

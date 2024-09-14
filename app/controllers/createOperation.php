@@ -16,6 +16,8 @@ $result = $operation->createOperation([
 ]);
 
 if($result['statement']){
+    $json = array_merge($json, [ 'id' => $result['id']]);
+
     Response::success($json, 'Operação salva com sucesso!');
 }
 

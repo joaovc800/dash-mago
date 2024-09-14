@@ -75,3 +75,8 @@ html {
     align-items: center;
     gap: 6px;
 }
+
+.pagination-link:is(.is-current){
+    background-color: var(--is-purple-medium) !important;
+    border-color: var(--is-purple-dark);
+}

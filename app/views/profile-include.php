@@ -1,10 +1,10 @@
-<div class="is-flex is-justify-content-flex-end">
+<div class="is-flex is-justify-content-flex-end mb-4">
     <div class="dropdown">
         <div id="dropdown-trigger-menu" class="dropdown-trigger is-clickable">
             <div class="is-flex is-align-items-center is-gap-1 is-justify-content-flex-end" aria-haspopup="true" aria-controls="dropdown-user">
                 <span><?php echo $_SESSION['auth']['username'] ?></span>
-                <figure class="image is-48x48">
-                    <img class="is-rounded" src="https://bulma.io/assets/images/placeholders/128x128.png" />
+                <figure class="image is-24x24">
+                    <img class="is-rounded" src="./images/profile.png" />
                 </figure>
             </div>
         </div>
@@ -49,6 +49,8 @@
 </script>
 
 <script defer src="./assets/js/notify.js"></script>
+<script defer src="https://unpkg.com/@popperjs/core@2"></script>
+<script defer src="https://unpkg.com/tippy.js@6"></script>
 <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script defer src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
 <script defer src="https://cdn.datatables.net/2.1.5/js/dataTables.bulma.js"></script>

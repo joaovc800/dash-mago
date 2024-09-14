@@ -9,10 +9,17 @@ $operation = new Operation($_SESSION['auth']['id']);
 
 $all = $operation->getAllOperations();
 
-Response::success($all, 'Dados retornados com sucesso');
+if(!isset($all['erro'])){
 
-/* if($update['statement']){
-    Response::success(message:'Senha atualizada com sucesso!');
+    $total = $operation->getTotalOperations();
+
+    $byMonths = $operation->getTotalOperationsByMonths();
+
+    Response::success([
+        'all' => $all,
+        'total' => $total['fetch'],
+        'months' => $byMonths['fetch']
+    ], 'Dados retornados com sucesso');
 }
 
-Response::fail(message:'Houve um erro ao atualizar a senha, por favor tente novamente!'); */
+Response::fail([], 'Você ainda não tem operações registradas.');

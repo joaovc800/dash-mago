@@ -31,7 +31,8 @@ class Operation
         $result = DB::statement(
             "SELECT 
                     DATE_FORMAT(date, '%d/%m/%Y') as date,
-                    value
+                    value,
+                    id
                 FROM operations 
                 WHERE iduser = :iduser
                 ORDER BY date, value
@@ -59,5 +60,35 @@ class Operation
         $insert = DB::insert('operations', $collection);
 
         return $insert;
+    }
+
+    public function deleteOperation(int $id): array
+    {
+        $delete = DB::statement("DELETE FROM operations WHERE id = $id");
+        return $delete;
+    }
+
+    public function getTotalOperations(): array
+    {
+        $operationstotal = DB::statement("SELECT YEAR(date) AS year,
+                                                        COUNT(DISTINCT date) AS daysOperated,
+                                                        SUM(value) AS profit
+                                                   FROM operations
+                                                  WHERE iduser = {$this->userId}
+                                               GROUP BY YEAR(date)
+                                               ORDER BY YEAR(date) desc");
+        return $operationstotal;
+    }
+    public function getTotalOperationsByMonths(): array
+    {
+        $operationstotalByMonths = DB::statement("SELECT YEAR(date) AS year,
+                                                                MONTH(date) AS month,
+                                                                COUNT(DISTINCT date) AS total_days_operated,
+                                                                SUM(value) AS total_profit
+                                                          FROM operations
+                                                         WHERE iduser = {$this->userId}
+                                                      GROUP BY YEAR(date), MONTH(date)
+                                                      ORDER BY YEAR(date), MONTH(date)");
+        return $operationstotalByMonths;
     }
 }
