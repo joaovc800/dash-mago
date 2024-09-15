@@ -11,9 +11,11 @@ $map = [
     'chip' => 'ficha',
     'gale' => 'gale',
     'initialBankroll' => 'banca_inicial',
+    'currentBankroll' => 'banca_atual',
     'stoploss' => 'stoplos',
     'stopwin' => 'stopwin',
-    'status' => 'status'
+    'status' => 'status',
+    'operations' => 'noperacoes'
 ];
 
 $collection = [];

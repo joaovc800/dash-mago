@@ -61,6 +61,14 @@ if($current > $exp){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="../../public/src/assets/css/styles.css">
+
+    <meta property="og:title" content="Dashboard de método de análise e leituras">
+    <meta property="og:description" content="Alteração de senha solicitada">
+    <meta property="og:image" content="https://mago.iamonstro.com.br/public/src/assets/images/logo-main.jpg">
+    <meta property="og:url" content="https://mago.iamonstro.com.br/public/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Método de análise e leituras">
+    <meta property="og:locale" content="pt_BR">
 </head>
 
 <body>

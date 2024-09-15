@@ -14,10 +14,16 @@
                     Perfil
                     <i class="fa-solid fa-user"></i>
                 </a>
-                <a href="./operations.php" class="dropdown-item is-danger is-flex is-align-items-center is-gap-1">
-                    Operações
-                    <i class="fa-solid fa-cogs"></i>
-                </a>
+                <?php
+                    if($_SESSION['auth']['active']):
+                ?>
+                    <a href="./operations.php" class="dropdown-item is-danger is-flex is-align-items-center is-gap-1">
+                        Operações
+                        <i class="fa-solid fa-cogs"></i>
+                    </a>
+                <?php
+                    endif;
+                ?>
                 <a href="./dashboard.php" class="dropdown-item is-danger is-flex is-align-items-center is-gap-1">
                     Dashboard
                     <i class="fa-solid fa-chart-simple"></i>

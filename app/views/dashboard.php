@@ -38,7 +38,7 @@ require_once realpath(dirname(__DIR__, 1) . '/controllers/checkSession.php');
                     <span id="entries" class="is-size-5 has-text-weight-bold">0</span>
                 </div>
 
-                <div data-profit="win" class="is-shadowless card is-flex is-flex-direction-column m-0 px-4 py-2 has-text-light">
+                <div data-profit="" class="is-shadowless card is-flex is-flex-direction-column m-0 px-4 py-2 has-text-light">
                     <span>Lucro total</span>
                     <span id="profit" class="is-size-5 has-text-weight-bold">R$ 0</span>
                 </div>

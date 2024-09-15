@@ -11,6 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Dashboard Mago</title>
     <link rel="stylesheet" href="./src/assets/css/styles.css">
+
+    <meta property="og:title" content="Dashboard de método de análise e leituras">
+    <meta property="og:description" content="Explore nosso dashboard completo com roletas e métodos de análise avançados. Visualize dados, faça leituras e tome decisões informadas com nossa ferramenta poderosa.">
+    <meta property="og:image" content="https://mago.iamonstro.com.br/public/src/assets/images/logo-main.jpg">
+    <meta property="og:url" content="https://mago.iamonstro.com.br/public/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Método de análise e leituras">
+    <meta property="og:locale" content="pt_BR">
 </head>
 
 <body>
@@ -31,7 +39,7 @@
                             endif;
                         ?>
                         <form method="post" action="../app/controllers/login.php" class="box">
-                            <img class="image py-2 is-16by9" src="./src/assets/images/roleta-brasileira-playtech.jpg">
+                            <img class="image py-2 is-16by9" src="./src/assets/images/logo-main.jpg">
                             <div class="field">
                                 <label for="username" class="label">Email</label>
                                 <div class="control has-icons-left">

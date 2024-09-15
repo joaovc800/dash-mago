@@ -4,6 +4,7 @@ class DB
 {
     private static function connect()
     {
+
         try {
             $config = [
                 'host' => 'mysql.iamonstro.com.br',

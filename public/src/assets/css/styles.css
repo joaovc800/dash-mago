@@ -41,6 +41,10 @@ html {
     background-color: var(--is-green-medium) !important;
 }
 
+.has-background-danger-medium {
+    background-color: var(--is-danger-medium) !important;
+}
+
 [data-profit="win"] {
     background-color: var(--is-green-medium) !important;
 }
@@ -55,6 +59,18 @@ html {
 
 [data-state="off"] {
     background-color: var(--is-cyan) !important;
+}
+
+.is-boxshadow-purple-medium{
+    --bulma-shadow: 0 0.5em 1em -0.125em var(--is-purple-medium), 0 0px 0 1px var(--is-purple-medium) !important;
+}
+
+.is-boxshadow-green-medium{
+    --bulma-shadow: 0 0.5em 1em -0.125em var(--is-green-medium), 0 0px 0 1px var(--is-green-medium) !important;
+}
+
+.is-boxshadow-danger-medium{
+    --bulma-shadow: 0 0.5em 1em -0.125em var(--is-danger-medium), 0 0px 0 1px var(--is-danger-medium) !important;
 }
 
 .input:focus,
@@ -79,4 +95,8 @@ html {
 .pagination-link:is(.is-current){
     background-color: var(--is-purple-medium) !important;
     border-color: var(--is-purple-dark);
+}
+
+#dashboard:not([active]), #config:not([active]){
+    filter: blur(5px);
 }

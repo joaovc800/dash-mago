@@ -12,7 +12,7 @@ $user = new User([
 
 $informations = $user->getDetails();
 
-if($informations['signature']){
+if($informations['active']){
     Response::success($informations, 'Dados retornados com sucesso');
 }
 

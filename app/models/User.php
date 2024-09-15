@@ -61,6 +61,7 @@ class User
                 "id" => $result["fetch"][0]["id"],
                 "maturity" => $result["fetch"][0]["vencimento"],
                 "signature" => $result["fetch"][0]["assinatura"],
+                "active" => $result["fetch"][0]["ativo"]
             ];
         }
 
@@ -77,17 +78,25 @@ class User
 
         if (count($result["fetch"]) > 0) {
 
+            $values = $result["fetch"][0];
+
+            $stopWinRealValue = (int) $values["banca_inicial"] + $values["stopwin"];
+            $stopLossRealValue = (int) $values["banca_inicial"] - $values["stopwin"];
+
             return [
-                "initialBankroll" => (int) $result["fetch"][0]["banca_inicial"],
-                "currentBankroll" => (int) $result["fetch"][0]["banca_atual"],
-                "stopwin" => (int) $result["fetch"][0]["stopwin"],
-                "stoploss" => (int) $result["fetch"][0]["stoplos"],
-                "chip" => $result["fetch"][0]["ficha"],
-                "gale" => $result["fetch"][0]["gale"],
-                "status" => $result["fetch"][0]["status"],
-                "operations" => $result["fetch"][0]["noperacoes"],
-                "signature" => $result["fetch"][0]["assinatura"],
-                "maturity" => $result["fetch"][0]["vencimento"],
+                "initialBankroll" => (int) $values["banca_inicial"],
+                "currentBankroll" => (int) $values["banca_atual"],
+                "stopwin" => (int) $values["stopwin"],
+                "stoploss" => (int) $values["stoplos"],
+                "stopwinReal" => $stopWinRealValue,
+                "stoplossReal" => $stopLossRealValue,
+                "chip" => $values["ficha"],
+                "gale" => $values["gale"],
+                "status" => $values["status"],
+                "operations" => $values["noperacoes"],
+                "signature" => $values["assinatura"],
+                "maturity" => $values["vencimento"],
+                "active" => $values["ativo"]
             ];
         }
 

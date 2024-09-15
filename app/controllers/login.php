@@ -10,10 +10,9 @@ $user = new User([
 
 $informations = $user->getUser();
 
-
 if(!isset($informations['erro'])){
 
-    if(!$informations['signature']){
+    if(!(bool) $informations['active']){
         header("Location: ../../public/index.php?error=1&message=Sua assinatura não está mais ativa.");
         die();
     }

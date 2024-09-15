@@ -133,14 +133,23 @@ function updateOperationInformations(data) {
     const isDaysOrDay = daysOperatedValue > 1 ? 'dias' : 'dia'
 
     daysOperated.innerText = `${daysOperatedValue} ${isDaysOrDay}`
+    daysOperated.closest('.card').classList.add('is-boxshadow-purple-medium')
 
     const isPrifitPositive = profitValue > 0 ? {
-        color: 'has-background-green-medium', icon: '<sup class="mx-2 fa-solid fa-arrow-trend-up"></sup>'
+        color: 'has-background-green-medium',
+        icon: '<sup class="mx-2 fa-solid fa-arrow-trend-up"></sup>',
+        boxshadow: 'is-boxshadow-green-medium'
     } : {
-        color: 'is-danger', icon: '<sup class="mx-2 fa-solid fa-arrow-trend-down"></sup>'
+        color: 'has-background-danger-medium',
+        icon: '<sup class="mx-2 fa-solid fa-arrow-trend-down"></sup>',
+        boxshadow: 'is-boxshadow-danger-medium'
     }
 
+    profit.classList.remove('has-background-green-medium', 'has-background-danger-medium')
     profit.classList.add(isPrifitPositive.color)
+
+    profit.closest('.card').classList.remove('is-boxshadow-green-medium', 'is-boxshadow-danger-medium')
+    profit.closest('.card').classList.add(isPrifitPositive.boxshadow)
 
     profit.innerHTML = `${formatCurrency(profitValue)} ${isPrifitPositive.icon}`
 }
@@ -182,7 +191,15 @@ function addRow({ date, initialBankroll, value, instance, id }) {
 
     const balance = initialBankroll + (value)
 
-    const { color, text } = balance > initialBankroll ? { color: 'has-background-green-medium', text: 'Positivo' } : { color: 'is-danger', text: 'Negativo' }
+    const { color, text } = balance > initialBankroll ?
+        {
+            color: 'has-background-green-medium',
+            text: 'Positivo'
+        } :
+        {
+            color: 'has-background-danger-medium',
+            text: 'Negativo'
+        }
 
     const tag = `
         <span class="tag ${color} has-text-light">
@@ -297,8 +314,6 @@ if (success) {
         data.all.forEach(({ date, value, id }) => addRow({ date, value, id, instance, initialBankroll }))
     }
 
-    /* tippy('.delete-operation', { content: 'Deletar operação' }) */
-
     data.total.forEach(({ year }) => {
         yearSelector.innerHTML += `<option value="${year}">${year}</option>`
     })
@@ -311,4 +326,12 @@ if (success) {
 yearSelector.addEventListener('change', async (event) => {
     const { data } = await requests.get(api.base('getOperations'))
     updateChart(event.target.value, data.months)
+})
+
+instance.on('draw', function () {
+    tippy('.delete-operation', {
+        content: 'Deletar operação',
+        placement: 'top',
+        arrow: true
+    });
 })
